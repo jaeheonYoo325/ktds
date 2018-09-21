@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- MemberDaoImpl이 사용할 Query 작성 -->
+	<bean	id="memberQueries"
+			class="java.util.ArrayList">
+		<constructor-arg name="c">
+			<list>
+				<!-- 0번 인덱스 -->
+				<value>
+					INSERT INTO MEMBERS (
+												   EMAIL
+												   , NAME
+												   , PASSWORD								   
+												) 
+					VALUES 						(
+													?
+													, ?
+													, ?												
+												)
+				</value>
+				<!-- 1번 인덱스 -->
+				<value>
+					SELECT	EMAIL
+							, NAME
+							, PASSWORD
+							, POINT
+					FROM	MEMBERS
+					WHERE	EMAIL = ?
+					AND		PASSWORD = ?
+				</value>
+				<!-- 2번 인덱스 -->
+				<value>
+					UPDATE	MEMBERS
+					SET		POINT = POINT + ?
+					WHERE	EMAIL = ?
+				</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>
